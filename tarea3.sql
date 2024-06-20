@@ -145,11 +145,13 @@ references companies(company_id);
 
 #EJERCICIO 1
 #MOSTRAR TODOS LOS USUARIOS CON MAS DE 30 TRANSACCIONES
-SELECT users.id, users.name, users.surname, count(transactions.id) as cont
+SELECT users.name, users.surname
 FROM USERS
-join transactions on transactions.user_id= users.id
-group by 1,2,3
-having cont> 30;
+where users.id in ( select user_id  from transactions
+group by  user_id
+having count(id) > 30);
+
+
 
 
 select *
